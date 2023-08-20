@@ -1,29 +1,33 @@
+import { getCharacters } from "@/utils/api";
 import AllCharacters from "./AllCharacters";
 import Search from "./Search";
 import StaffCharacters from "./StaffCharacters";
 import StudentCharacters from "./StudentCharacters";
 
-const Feed = () => {
-    return (
-    <main>
-      <div className="feed">
-      <Search/>
+const Feed = async() => {
+  return (
+  <main>
+    <div className="text-center mt-10">
+      <p className="text-3xl font-bold">All Characters</p>
+      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-3 max-lg:grid-cols-5 mt-10">
+          <AllCharacters/>
       </div>
-      <div className="flex padding-x padding-y ml-5 mt-12">
-        <h1 className="text-4xl">All Characters</h1>
+    </div>
+    <div className="text-center mt-16">
+      <p className="text-3xl font-bold">Hogwart Students</p>
+      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-3 max-lg:grid-cols-5 mt-10">
+          <StudentCharacters/>
       </div>
-      <AllCharacters/>
-      <div className="flex padding-x padding-y ml-5 mt-12">
-        <h1 className="text-4xl">Hogwart Students</h1>
+    </div>
+    <div className="text-center mt-16">
+      <p className="text-3xl font-bold">Hogwart Staff</p>
+      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-3 max-lg:grid-cols-5 mt-10">
+          <StaffCharacters/>
       </div>
-      <StudentCharacters/>
-      <div className="flex padding-x padding-y ml-5 mt-12">
-        <h1 className="text-4xl">Hogwart Staff</h1>
-      </div>
-      <StaffCharacters/>
-    </main>
-    
-  )
+    </div>
+  </main>
+  
+)
 }
 
 export default Feed

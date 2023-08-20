@@ -1,25 +1,18 @@
 "use client"
 
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react"
-import React from 'react'
+import { useRouter } from "next/navigation";
+import { useState, KeyboardEvent } from "react"
 
 const Search = () => {
-    const [searchText, setSearchText] = useState('');
-    const [posts, setPosts] = useState([]);
+    const [searchText, setSearchText] = useState<string>('');
+    const router = useRouter();
 
-    useEffect(() => {
-        const fetchCharacters = async() => {
-        const response = await fetch('https://hp-api.onrender.com/api/characters');
-        const data = await response.json();
-
-        setPosts(data);
-        }
-
-        fetchCharacters();
-    },[])
-
-    const handleSearchChange = () => {}
+    const handleSearchChange = (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter' && searchText.trim() !== '') {
+        setSearchText('');
+        router.push(`/search?query=${searchText}`);
+      }
+    }
 
   return (
     <form className='relative w-full flex-center'>
@@ -27,9 +20,10 @@ const Search = () => {
         type="text"
         placeholder='Search by name or house'
         value={searchText}
-        onChange={handleSearchChange}
+        onChange={(e) => setSearchText(e.target.value)}
         required
         className='search_input peer'
+        onKeyDown={handleSearchChange}
         />
       </form>
   )

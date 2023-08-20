@@ -1,7 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect,FC } from "react"
 import Image from 'next/image'
+import Link from "next/link"
+import { Characters } from "@/types/potter"
 
 interface Character{
   id: string;
@@ -10,48 +12,58 @@ interface Character{
   dateOfBirth: string;
 }
 
-const AllCharacters = ({handleClick}:any) => {
+const AllCharacters = () => {
+  
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchCharacters = async() => {
+      const fetchCharacters = async() => {
       try {
-        const response = await fetch('https://hp-api.onrender.com/api/characters');
-        const data = await response.json();
-
-        setCharacters(data);
-        setLoading(false);
+          const response = await fetch(`https://hp-api.onrender.com/api/characters`);
+          const data = await response.json();
+          // console.log(data)
+          setCharacters(data);
+          setLoading(false);
       } catch (error) {
-        setError('An error occurred while fetching data.');
-        setLoading(false);
+          setError('An error occurred while fetching data.');
+          setLoading(false);
       } 
-    }
-    fetchCharacters();
+      }
+      fetchCharacters();
   },[])
 
-  return (
-    <section className="grid grid-cols-3 gap-2 ml-5">
-      {characters.map((character) => (
-        <div className='prompt_card mt-16 ' key={character.id}>
-          <div className='flex justify-between items-start gap-5'>
-            <div className='flex-1 flex justify-start items-center gap-3 cursor-pointer'>
-            <Image
-              src={character.image}
-              alt={character.name}
-              width={100}
-              height={100}
-              className='rounded-full'
-            />
+  const numCardsToShow = 5;
+
+  return(
+    <>
+      {characters.slice(0, numCardsToShow).map((character) => (
+        <div className="card w-full bg-base-100 shadow-xl cursor-pointer">
+          <Link href={`/characters/${character.id}`}>
+            <figure className="px-10 pt-10">
+              <Image
+                src={character.image}
+                alt={character.name}
+                width={200}
+                height={150}
+              />
+            </figure>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">{character.name}</h2>
+              <p>Date of Birth: {character.dateOfBirth}</p>
+              <div className="card-actions">
+                <div className="badge badge-outline">More details</div>
+              </div>
             </div>
-          </div>
-          <h2 className="mt-4 text-sm text-gray-700">{character.name}</h2>
-          <p className="mt-1 text-lg font-medium text-gray-900">Date of birth: {character.dateOfBirth || 'None'}</p>
-        </div>
+          </Link>
+      </div>
       ))}
-    </section>       
-  );
+      
+    </>
+  
+    
+  )
 }
 
 export default AllCharacters
