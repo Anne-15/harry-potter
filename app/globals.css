@@ -10,12 +10,9 @@
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.bg-light-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 250 251 / var(--tw-bg-opacity));
 }
 
 .container {
@@ -46,8 +43,6 @@ body {
   @apply lg:px-20 py-6 px-5;
 }
 
-
-
 .border-nav-border {
   --tw-border-opacity: 1;
   border-color: rgb(235 234 234 / var(--tw-border-opacity));
@@ -58,9 +53,7 @@ body {
   @apply py-5 px-8 border-b border-nav-border gap-4;
 }
 
-/* 
-  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
-*/
+
 
 @media screen and (max-width: 640px) {
   .main {
@@ -158,4 +151,17 @@ body {
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+/* Footer */
+.footer {
+  @apply flex-col paddings w-full gap-20;
+}
+
+.footer_copyright {
+  @apply max-sm:flex-col w-full text-sm font-normal;
+}
+
+.footer_column {
+  @apply flex-1 flex flex-col gap-3 text-sm min-w-max;
 }

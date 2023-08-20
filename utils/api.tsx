@@ -21,7 +21,7 @@ export const detailCharacter = async(id: string): Promise<CharacterWrapper> => {
 }
 
 export const searchCharacter = async(queryString: string | null): Promise<CharacterWrapper> => {
-    const urlId = `https://hp-api.onrender.com/api/character?name=${queryString}`;
+    const urlId = `https://hp-api.onrender.com/api/character?house=${queryString}`;
     const response = await fetch(urlId);
     return(handleResponse(response))
 }
