@@ -4,6 +4,7 @@ import Search from "./Search";
 import StaffCharacters from "./StaffCharacters";
 import StudentCharacters from "./StudentCharacters";
 import Spells from "./Spells";
+import Houses from "./Houses";
 
 const Feed = async() => {
   return (

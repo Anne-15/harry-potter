@@ -20,7 +20,7 @@ const Footer = () => {
     <footer className='flexStart footer'>
         <div className='flex flex-col gap-12 w-full'>
             <div className='flex items-start flex-col'>
-                <p className='logo_text ml-5'>Harry Potter</p>
+                <p className='logo_text'>Harry Potter</p>
                 <p className='text-start text-sm font-normal mt-5 max-w-xs'>
                     Harry Potter is a world's best selling author since early
                     2000.

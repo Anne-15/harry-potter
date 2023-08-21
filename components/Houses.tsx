@@ -6,24 +6,22 @@ import Link from "next/link"
 import { Characters } from "@/types/potter"
 
 interface Character{
-  id: string;
-  name: string;
-  description: string;
+    id: string,
+    house: string
 }
 
-const Spells = () => {
+const Houses = () => {
   
-  const [spells, setSpells] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
       const fetchCharacters = async() => {
       try {
-          const response = await fetch(`https://hp-api.onrender.com/api/spells`);
+          const response = await fetch(`https://hp-api.onrender.com/api/characters`);
           const data = await response.json();
-          // console.log(data)
-          setSpells(data);
+          setCharacters(data);
           setLoading(false);
       } catch (error) {
           setError('An error occurred while fetching data.');
@@ -33,17 +31,18 @@ const Spells = () => {
       fetchCharacters();
   },[])
 
-  const numCardsToShow = 10;
+  const numCardsToShow = 8;
 
   return(
     <>
-      {spells.slice(0, numCardsToShow).map((spells) => (
-        <div className="card w-full bg-base-100 shadow-xl">
-            <div className="card-body">
-            <h2 className="card-title">{spells.name}</h2>
-            <p>{spells.description}</p>
+      {characters.map((character) => (
+        <div className="card w-full bg-base-100 shadow-xl cursor-pointer">
+          <Link href={`/characters/${character.id}`}>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">{character.house}</h2>
             </div>
-        </div>
+          </Link>
+      </div>
       ))}
       
     </>
@@ -52,4 +51,4 @@ const Spells = () => {
   )
 }
 
-export default Spells
+export default Houses

@@ -4,6 +4,7 @@ import { useState, useEffect,FC } from "react"
 import Image from 'next/image'
 import Link from "next/link"
 import { Characters } from "@/types/potter"
+import Loading from "@/app/loading"
 
 interface Character{
   id: string;
@@ -38,28 +39,33 @@ const StaffCharacters = () => {
 
   return(
     <>
-      {characters.slice(0, numCardsToShow).map((character) => (
-        <div className="card w-full bg-base-100 shadow-xl cursor-pointer">
-          <Link href={`/characters/${character.id}`}>
-            <figure className="px-10 pt-10">
-              <Image
-                src={character.image}
-                alt={character.name}
-                width={200}
-                height={150}
-              />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h2 className="card-title">{character.name}</h2>
-              <p>Date of Birth: {character.dateOfBirth}</p>
-              <div className="card-actions">
-                <div className="badge badge-outline">More details</div>
+      {loading ? (
+        // Display a loading element while data is being fetched
+        <Loading/>
+      ) : (
+        // Once data is fetched, map through the characters
+        characters.slice(0, numCardsToShow).map((character) => (
+          <div key={character.id} className="card w-full bg-base-100 shadow-xl cursor-pointer">
+            <Link href={`/characters/${character.id}`}>
+              <figure className="px-10 pt-10">
+                <Image
+                  src={character.image}
+                  alt={character.name}
+                  width={200}
+                  height={150}
+                />
+              </figure>
+              <div className="card-body items-center text-center">
+                <h2 className="card-title">{character.name}</h2>
+                <p>Date of Birth: {character.dateOfBirth}</p>
+                <div className="card-actions">
+                  <div className="badge badge-outline">More details</div>
+                </div>
               </div>
-            </div>
-          </Link>
-      </div>
-      ))}
-      
+            </Link>
+          </div>
+        ))
+      )}
     </>
   
     
