@@ -1,4 +1,4 @@
-import { CharacterWrapper } from "@/types/potter";
+import { CharacterWrapper, Characters } from "@/types/potter";
 
 const handleResponse = async (response: Response) => {
     if(!response.ok){
@@ -14,13 +14,13 @@ export const getCharacters = async(): Promise<CharacterWrapper> => {
     return(handleResponse(response));
 }
 
-export const detailCharacter = async(id: string): Promise<CharacterWrapper> => {
+export const detailCharacter = async(id: string): Promise<Characters[]> => {
     const urlId = `https://hp-api.onrender.com/api/character/${id}`;
     const response = await fetch(urlId);
     return(handleResponse(response))
 }
 
-export const searchCharacter = async(queryString: string | null): Promise<CharacterWrapper> => {
+export const searchCharacter = async(queryString: string | null): Promise<Characters[]> => {
     const urlId = `https://hp-api.onrender.com/api/character?house=${queryString}`;
     const response = await fetch(urlId);
     return(handleResponse(response))

@@ -1,7 +1,7 @@
 export interface Characters {
     id: string,
     name: string,
-    alternate_names: [],
+    alternate_names: string[],
     species: string,
     gender: string,
     house: string,
@@ -20,7 +20,7 @@ export interface Characters {
     hogwartsStudent: boolean,
     hogwartsStaff: boolean,
     actor: string,
-    alternate_actors: [],
+    alternate_actors: string[],
     alive: boolean,
     image: string
 }

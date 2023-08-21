@@ -18,7 +18,7 @@ const SearchPage = () => {
             setIsLoading(true);
             try {
                 const data = await searchCharacter(querySearch);
-                setCharacter(data.results);
+                setCharacter(data);
             } catch (error) {
                 setIsLoading(false);
                 console.error(error);
@@ -29,6 +29,7 @@ const SearchPage = () => {
             }
         }
     },[querySearch])
+    
   return (
     <div className='container text-center mt-10'>
         <h1 className='text-3xl font-bold'>
