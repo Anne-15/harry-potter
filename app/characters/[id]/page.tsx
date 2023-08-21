@@ -17,11 +17,12 @@ const CharacterDetailsPage: FC<Character> = async ({params}) => {
     // console.log(id)
 
     try {
+        
         const characters = await detailCharacter(id);
         // console.log(characters)
     
         if (characters && characters.length > 0) {
-        const { image, name, house, ancestry, actor, wand } = characters.results[0];
+        const { image, name, house, ancestry, actor, wand } = characters[0];
         
         return (
             <section>
