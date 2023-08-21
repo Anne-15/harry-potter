@@ -2,7 +2,7 @@ import { CharacterWrapper } from "@/types/potter";
 
 const handleResponse = async (response: Response) => {
     if(!response.ok){
-        throw new Error(response.statusText)
+        throw Error(response.statusText)
     }
     const data = await response.json();
     return data;
